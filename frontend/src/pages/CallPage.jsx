@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
@@ -52,6 +52,23 @@ const CallPage = () => {
 
         const callInstance = videoClient.call("default", callId);
         await callInstance.join({ create: true });
+
+        // Try to enable the camera right after joining the call
+        try {
+          await callInstance.camera.enable();
+        } catch (err) {
+          console.log("Failed to enable camera on join:", err);
+          // Attempt to prompt browser permissions explicitly
+          try {
+            await navigator.mediaDevices.getUserMedia({ video: true });
+            await callInstance.camera.enable();
+          } catch (permErr) {
+            console.log("Camera permission or availability issue:", permErr);
+            toast.error(
+              "Can't access your camera. Check browser permissions and that no other app is using it."
+            );
+          }
+        }
 
         setClient(videoClient);
         setCall(callInstance);

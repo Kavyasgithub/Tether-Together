@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import { useChatContext } from "stream-chat-react";
 
 import * as Sentry from "@sentry/react";
@@ -81,7 +81,7 @@ const UsersList = ({ activeChannel }) => {
             key={user.id}
             onClick={() => startDirectMessage(user)}
             className={`str-chat__channel-preview-messenger  ${
-              isActive && "!bg-black/20 !hover:bg-black/20 border-l-8 border-purple-500 shadow-lg0"
+              isActive && "!bg-black/20 !hover:bg-black/20 border-l-8 border-blue-500 shadow-lg0"
             }`}
           >
             <div className="flex items-center gap-2 w-full">

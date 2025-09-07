@@ -11,7 +11,7 @@ import {
   useNavigationType,
   createRoutesFromChildren,
   matchRoutes,
-} from "react-router";
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import * as Sentry from "@sentry/react";
