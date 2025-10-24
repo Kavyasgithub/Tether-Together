@@ -2,7 +2,7 @@ import { HashIcon, LockIcon, UsersIcon, PinIcon, VideoIcon, Trash2Icon, MoreVert
 import { useChannelStateContext, useChatContext } from "stream-chat-react";
 import { useState, useEffect, useRef } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import MembersModal from "./MembersModal";
 import PinnedMessagesModal from "./PinnedMessagesModal";
@@ -13,6 +13,7 @@ const CustomChannelHeader = () => {
   const { client } = useChatContext();
   const { user } = useUser();
   const [_, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const memberCount = Object.keys(channel.state.members).length;
 
@@ -61,12 +62,18 @@ const CustomChannelHeader = () => {
 
   const handleDeleteChannel = async () => {
     try {
-      // Delete the channel
+      // Delete the channel from Stream
       await channel.delete();
-      toast.success("Channel deleted successfully");
+      
+      // Close the modal first
       setShowDeleteChannel(false);
-      // Navigate back to home (clear channel from URL)
+      
+      // Clear the channel from URL parameters - this will trigger HomePage to clear activeChannel
       setSearchParams({});
+      
+      // Show success message
+      toast.success("Channel deleted successfully");
+      
     } catch (error) {
       console.error("Error deleting channel:", error);
       toast.error("Failed to delete channel");

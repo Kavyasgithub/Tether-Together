@@ -36,6 +36,9 @@ const HomePage = () => {
       if (channelId) {
         const channel = chatClient.channel("messaging", channelId);
         setActiveChannel(channel);
+      } else {
+        // Clear active channel when no channel ID in URL
+        setActiveChannel(null);
       }
     }
   }, [chatClient, searchParams]);
