@@ -93,72 +93,72 @@ const CustomChannelHeader = () => {
   };
 
   return (
-    <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
+    <div className="h-14 border-b border-white/[0.06] flex items-center px-4 justify-between bg-[var(--t-surface-1,#0f1d32)]">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           {channel.data?.private ? (
-            <LockIcon className="size-4 text-[#616061]" />
+            <LockIcon className="size-4 text-slate-400" />
           ) : (
-            <HashIcon className="size-4 text-[#616061]" />
+            <HashIcon className="size-4 text-slate-400" />
           )}
 
           {isDM && otherUser?.user?.image && (
             <img
               src={otherUser.user.image}
               alt={otherUser.user.name || otherUser.user.id}
-              className="size-7 rounded-full object-cover mr-1"
+              className="size-7 rounded-full object-cover ring-1 ring-white/10 mr-1"
             />
           )}
 
-          <span className="font-medium text-[#1D1C1D]">
+          <span className="font-semibold text-sm text-white">
             {isDM ? otherUser?.user?.name || otherUser?.user?.id : channel.data?.id}
           </span>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5">
         <button
-          className="flex items-center gap-2 hover:bg-[#F8F8F8] py-1 px-2 rounded"
+          className="flex items-center gap-1.5 hover:bg-white/[0.06] py-1.5 px-2.5 rounded-lg transition-colors"
           onClick={() => setShowMembers(true)}
         >
-          <UsersIcon className="size-5 text-[#616061]" />
-          <span className="text-sm text-[#616061]">{memberCount}</span>
+          <UsersIcon className="size-4 text-slate-400" />
+          <span className="text-xs font-medium text-slate-400">{memberCount}</span>
         </button>
 
         <button
-          className="hover:bg-[#F8F8F8] p-1 rounded"
+          className="hover:bg-white/[0.06] p-1.5 rounded-lg transition-colors"
           onClick={handleVideoCall}
           title="Start Video Call"
         >
-          <VideoIcon className="size-5 text-[#1264A3]" />
+          <VideoIcon className="size-4 text-blue-400" />
         </button>
 
         {channel.data?.private && (
-          <button className="btn btn-primary" onClick={() => setShowInvite(true)}>
+          <button className="btn btn-primary btn-small" onClick={() => setShowInvite(true)}>
             Invite
           </button>
         )}
 
-        <button className="hover:bg-[#F8F8F8] p-1 rounded" onClick={handleShowPinned}>
-          <PinIcon className="size-4 text-[#616061]" />
+        <button className="hover:bg-white/[0.06] p-1.5 rounded-lg transition-colors" onClick={handleShowPinned}>
+          <PinIcon className="size-4 text-slate-400" />
         </button>
 
         {/* Channel Options Dropdown */}
         {!isDM && (
           <div className="relative" ref={optionsRef}>
             <button
-              className="hover:bg-[#F8F8F8] p-1 rounded"
+              className="hover:bg-white/[0.06] p-1.5 rounded-lg transition-colors"
               onClick={() => setShowChannelOptions(!showChannelOptions)}
               title="Channel Options"
             >
-              <MoreVerticalIcon className="size-4 text-[#616061]" />
+              <MoreVerticalIcon className="size-4 text-slate-400" />
             </button>
 
             {showChannelOptions && (
-              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50 min-w-[150px]">
+              <div className="absolute right-0 top-full mt-1.5 bg-[var(--t-surface-2,#162236)] border border-white/[0.08] rounded-xl shadow-xl py-1 z-50 min-w-[160px]">
                 {canDeleteChannel() && (
                   <button
-                    className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 flex items-center gap-2 transition-colors"
                     onClick={() => {
                       setShowDeleteChannel(true);
                       setShowChannelOptions(false);
@@ -169,7 +169,7 @@ const CustomChannelHeader = () => {
                   </button>
                 )}
                 {!canDeleteChannel() && (
-                  <div className="px-3 py-2 text-sm text-gray-500">
+                  <div className="px-3 py-2 text-sm text-slate-500">
                     No options available
                   </div>
                 )}
@@ -220,32 +220,32 @@ const DeleteChannelModal = ({ channel, onConfirm, onCancel }) => {
   const isConfirmationValid = confirmText === channelName;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 border">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="bg-[var(--t-surface-2,#162236)] rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 border border-white/[0.08]">
         <div className="flex items-start gap-3 mb-4">
-          <div className="p-2 bg-red-100 rounded-full">
-            <Trash2Icon className="w-5 h-5 text-red-600" />
+          <div className="p-2 bg-red-500/10 rounded-full">
+            <Trash2Icon className="w-5 h-5 text-red-400" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-white mb-2">
               Delete Channel
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-slate-400 mb-4">
               This action cannot be undone. This will permanently delete the{" "}
-              <span className="font-medium">#{channelName}</span> channel and all its messages.
+              <span className="font-medium text-slate-200">#{channelName}</span> channel and all its messages.
             </p>
           </div>
         </div>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Type <span className="font-mono bg-gray-100 px-1 rounded">{channelName}</span> to confirm:
+          <label className="block text-sm font-medium text-slate-300 mb-2">
+            Type <span className="font-mono bg-white/[0.06] px-1.5 py-0.5 rounded text-slate-200">{channelName}</span> to confirm:
           </label>
           <input
             type="text"
             value={confirmText}
             onChange={(e) => setConfirmText(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent"
             placeholder={channelName}
             autoFocus
           />
@@ -254,7 +254,7 @@ const DeleteChannelModal = ({ channel, onConfirm, onCancel }) => {
         <div className="flex justify-end gap-3">
           <button
             onClick={onCancel}
-            className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors font-medium"
+            className="px-4 py-2 text-slate-400 hover:text-white transition-colors font-medium text-sm"
             disabled={isDeleting}
           >
             Cancel
@@ -262,7 +262,7 @@ const DeleteChannelModal = ({ channel, onConfirm, onCancel }) => {
           <button
             onClick={handleConfirm}
             disabled={!isConfirmationValid || isDeleting}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium"
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed transition-colors font-medium text-sm"
           >
             {isDeleting ? "Deleting..." : "Delete Channel"}
           </button>

@@ -80,39 +80,39 @@ const UsersList = ({ activeChannel }) => {
           <button
             key={user.id}
             onClick={() => startDirectMessage(user)}
-            className={`str-chat__channel-preview-messenger  ${
-              isActive && "!bg-black/20 !hover:bg-black/20 border-l-8 border-blue-500 shadow-lg0"
+            className={`str-chat__channel-preview-messenger ${
+              isActive ? "str-chat__channel-preview-messenger--active" : ""
             }`}
           >
-            <div className="flex items-center gap-2 w-full">
-              <div className="relative">
+            <div className="flex items-center gap-2.5 w-full">
+              <div className="relative flex-shrink-0">
                 {user.image ? (
                   <img
                     src={user.image}
                     alt={user.name || user.id}
-                    className="w-4 h-4 rounded-full"
+                    className="w-7 h-7 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-4 h-4 rounded-full bg-gray-400 flex items-center justify-center">
-                    <span className="text-xs text-white">
+                  <div className="w-7 h-7 rounded-full bg-blue-600/30 flex items-center justify-center">
+                    <span className="text-xs font-semibold text-blue-300">
                       {(user.name || user.id).charAt(0).toUpperCase()}
                     </span>
                   </div>
                 )}
 
                 <CircleIcon
-                  className={`w-2 h-2 absolute -bottom-0.5 -right-0.5 ${
-                    user.online ? "text-green-500 fill-green-500" : "text-gray-400 fill-gray-400"
+                  className={`w-2.5 h-2.5 absolute -bottom-0.5 -right-0.5 ring-2 ring-[var(--t-bg-dark,#0a1628)] rounded-full ${
+                    user.online ? "text-emerald-400 fill-emerald-400" : "text-slate-500 fill-slate-500"
                   }`}
                 />
               </div>
 
-              <span className="str-chat__channel-preview-messenger-name truncate">
+              <span className="str-chat__channel-preview-messenger-name truncate flex-1">
                 {user.name || user.id}
               </span>
 
               {unreadCount > 0 && (
-                <span className="flex items-center justify-center ml-2 size-4 text-xs rounded-full bg-red-500 ">
+                <span className="flex items-center justify-center ml-auto min-w-5 h-5 px-1 text-[10px] font-bold rounded-full bg-red-500 text-white">
                   {unreadCount}
                 </span>
               )}

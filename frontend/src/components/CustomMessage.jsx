@@ -105,20 +105,20 @@ const DeleteConfirmationModal = ({
   onCancel 
 }) => {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 border">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900">Delete Message</h3>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="bg-[var(--t-surface-2,#162236)] rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 border border-white/[0.08]">
+        <h3 className="text-lg font-semibold mb-4 text-white">Delete Message</h3>
         
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {/* Hide for me option - available for all users */}
           <button
             onClick={onDeleteForMe}
-            className="w-full text-left p-3 rounded-lg border hover:bg-gray-50 transition-colors flex items-start gap-3"
+            className="w-full text-left p-3 rounded-lg border border-white/[0.06] hover:bg-white/[0.04] transition-colors flex items-start gap-3"
           >
-            <Trash2Icon className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
+            <Trash2Icon className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
             <div>
-              <div className="font-medium text-gray-900">Hide for me</div>
-              <div className="text-sm text-gray-500">
+              <div className="font-medium text-slate-200 text-sm">Hide for me</div>
+              <div className="text-xs text-slate-400 mt-0.5">
                 This message will be hidden from your view only
               </div>
             </div>
@@ -127,22 +127,22 @@ const DeleteConfirmationModal = ({
           {/* Delete for everyone - available for ALL users and ALL messages */}
           <button
             onClick={onDeleteForEveryone}
-            className="w-full text-left p-3 rounded-lg border hover:bg-red-50 border-red-200 transition-colors flex items-start gap-3"
+            className="w-full text-left p-3 rounded-lg border border-red-500/20 hover:bg-red-500/10 transition-colors flex items-start gap-3"
           >
-            <Trash2Icon className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+            <Trash2Icon className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
             <div>
-              <div className="font-medium text-red-600">Delete for everyone</div>
-              <div className="text-sm text-red-500">
+              <div className="font-medium text-red-400 text-sm">Delete for everyone</div>
+              <div className="text-xs text-red-400/70 mt-0.5">
                 This message will be deleted for all participants
               </div>
             </div>
           </button>
         </div>
 
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="mt-5 flex justify-end">
           <button
             onClick={onCancel}
-            className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors font-medium"
+            className="px-4 py-2 text-slate-400 hover:text-white transition-colors font-medium text-sm"
           >
             Cancel
           </button>

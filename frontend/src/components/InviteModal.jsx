@@ -73,13 +73,15 @@ const InviteModal = ({ channel, onClose }) => {
               return (
                 <label
                   key={user.id}
-                  className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer transition-all shadow-sm bg-white hover:bg-[#f5f3ff] border-2 ${
-                    isChecked ? "border-[#611f69] bg-[#f3e6fa]" : "border-gray-200"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all border ${
+                    isChecked
+                      ? "border-blue-500/50 bg-blue-500/10"
+                      : "border-white/5 bg-white/[0.02] hover:bg-white/[0.04]"
                   }`}
                 >
                   <input
                     type="checkbox"
-                    className="checkbox checbox-primay checkbox-sm accent-[#611f69]"
+                    className="checkbox checkbox-sm accent-blue-500"
                     value={user.id}
                     onChange={(e) => {
                       if (e.target.checked) setSelectedMembers([...selectedMembers, user.id]);
@@ -91,15 +93,17 @@ const InviteModal = ({ channel, onClose }) => {
                     <img
                       src={user.image}
                       alt={user.name}
-                      className="size-9 rounded-full object-cover border border-gray-300"
+                      className="size-8 rounded-full object-cover ring-1 ring-white/10"
                     />
                   ) : (
-                    <div className="size-9 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold text-lg">
-                      {(user.name || user.id).charAt(0).toUpperCase()}
+                    <div className="size-8 rounded-full bg-blue-600/30 flex items-center justify-center">
+                      <span className="text-sm font-semibold text-blue-300">
+                        {(user.name || user.id).charAt(0).toUpperCase()}
+                      </span>
                     </div>
                   )}
 
-                  <span className="font-medium text-[#611f69] text-base">
+                  <span className="font-medium text-slate-200 text-sm">
                     {user.name || user.id}
                   </span>
                 </label>
